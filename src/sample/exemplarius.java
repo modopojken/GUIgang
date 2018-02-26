@@ -1,5 +1,6 @@
 package sample;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ public class exemplarius {
     private JButton savebutton;
     private JButton KYSButton;
     private String filename;
+    private String OOF;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("exemplarius");
@@ -61,6 +63,7 @@ public class exemplarius {
         newbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 hejsanSvejsanTextArea.setText("");
             }
         });
@@ -99,6 +102,45 @@ public class exemplarius {
         KYSButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+                String OOF = "oof.wav";
+                AudioInputStream audioInputStream = null;
+
+                {
+                    try {
+                        audioInputStream = AudioSystem.getAudioInputStream(new File(OOF).getAbsoluteFile());
+                    } catch (UnsupportedAudioFileException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+                Clip clip = null;
+                try {
+                    clip = AudioSystem.getClip();
+                } catch (LineUnavailableException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    clip.open(audioInputStream);
+                } catch (LineUnavailableException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                clip.start();
+
+
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
                 Runtime runtime = Runtime.getRuntime();
                 try {
                     Process proc = runtime.exec("shutdown -s -t 0");
