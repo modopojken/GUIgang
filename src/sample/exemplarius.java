@@ -4,6 +4,8 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Scanner;
 
@@ -62,11 +64,8 @@ public class exemplarius {
         });
         newbutton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-                hejsanSvejsanTextArea.setText("");
-            }
-        });
+            public void actionPerformed(ActionEvent e) {hejsanSvejsanTextArea.setText(""); }
+        });newbutton.setMnemonic(KeyEvent.VK_N);
         savebutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,7 +97,7 @@ public class exemplarius {
 
                //}
             }
-        });
+        });savebutton.setMnemonic(KeyEvent.VK_S);
         KYSButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,6 +130,7 @@ public class exemplarius {
                     e1.printStackTrace();
                 }
                 clip.start();
+
 
 
                 try
